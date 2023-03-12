@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_mvvm/view/splash_view.dart';
 
+import 'res/getx_localizations/languages.dart';
 import 'res/routes/routes.dart';
 
 void main() {
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
+      translations: Languages(),
+      locale: const Locale("en", "US"),
+      fallbackLocale: const Locale("en", "US"),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
