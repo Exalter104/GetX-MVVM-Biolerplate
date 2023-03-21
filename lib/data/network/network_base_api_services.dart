@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:getx_mvvm/data/exception.dart';
 import 'package:getx_mvvm/data/network/base_api_services.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:getx_mvvm/utils/utils.dart';
 // .................................GET API
 
 class NetworkApiResponse extends BaseApiServices {
@@ -41,13 +41,17 @@ class NetworkApiResponse extends BaseApiServices {
     dynamic responseJson;
     try {
       final response = await http
-          .post(Uri.parse(url), body: jsonEncode(data))
+          .post(Uri.parse(url), body: data)
           .timeout(const Duration(seconds: 3));
       responseJson = returnResponse(response);
     } on SocketException {
       throw InternetException("");
     } on RequestTimoutException {
       throw RequestTimoutException("");
+    }
+    if (kDebugMode) {
+      print(responseJson);
+      Utils.snackBar("Token", responseJson.toString());
     }
     return responseJson;
   }
